@@ -19,16 +19,19 @@
       return "Некорректный месяц";
     }
 
-    let date = new Date().getTime();
+    let date = new Date();
 
     try {
-      date = new Date(year, month-1, day).getTime();
+      date = new Date(year, month-1, day);
+      if (day !== date.getDate()) {
+        return "Некорректная дата дд.мм.гггг";
+      }
     } catch (err) {
       console.log("Некорректная дата дд.мм.гггг", err);
       return "Некорректная дата дд.мм.гггг";
     }
 
-    if (date > today) {
+    if (date.getTime() > today) {
       return "Эта дата ещё не наступила";
     }
 

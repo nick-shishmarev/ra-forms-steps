@@ -1,7 +1,7 @@
-import "./Form.css";
-import { useState } from "react";
-import type { Training } from "../../App";
-import { validateDate } from "../Lib/validatedate";
+import './Form.css';
+import { useState } from 'react';
+import type { Training } from '../../App';
+import { validateDate } from '../Lib/validatedate';
 
 interface FormProps {
   onSubmit: (training: Training) => void
@@ -19,6 +19,8 @@ export function Form({ onSubmit }: FormProps) {
     if (date.length > 9) {
       const error = validateDate(date);
       setError(error);
+    } else {
+      setError('Введите дату дд.мм.гггг');
     }
   }
   
@@ -31,7 +33,7 @@ export function Form({ onSubmit }: FormProps) {
     
     const date  = dateToShow;
     const distance  = Number(distanceToShow);
-    const training: Training = { id: "", date, distance };
+    const training: Training = { id: '', date, distance };
     setDate('');
     setDistance('');
     setError('Введите дату дд.мм.гггг');
@@ -45,7 +47,7 @@ export function Form({ onSubmit }: FormProps) {
       <form id="trainingForm" onSubmit={submitHandler}>
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="date">Дата (ДД.ММ.ГГ)</label> 
+            <label htmlFor="date">Дата (ДД.ММ.ГГГГ)</label> 
             <input type="text" 
               id="date" 
               name="date" 
@@ -73,12 +75,12 @@ export function Form({ onSubmit }: FormProps) {
 
           <button type="submit" 
             className="submit-btn"
-            disabled={error !== ""}
+            disabled={error !== ''}
           >OK</button>
         </div>
       </form>
       <div className="error-box">
-        {error && <div className= "error-message">{error}</div>}
+        {error && <div className="error-message">{error}</div>}
       </div>
     </div>
   )
